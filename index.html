@@ -22,17 +22,33 @@
         <div class="column-full">
           <h3>Code Journal</h3>
         </div>
-        <div class="row">
-          <div class="column-half">
-            <h1>New Entry</h1>
-            <img src="images/placeholder-image-square.jpg">
-          </div>
+      </div>
+      <div class="row">
+        <div class="column-half">
+          <h1>New Entry</h1>
+          <img src="images/placeholder-image-square.jpg">
         </div>
       </div>
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form"></div>
+    <div data-view="entry-form">
+      <form>
+        <div class="row">
+          <div class="column-half">
+            <label for="title">Title</label>
+            <input required type="text" name="title" class="title">
+
+            <label for="photo-url">Photo URL</label>
+            <input required type="url" name="photo-url" class="url">
+          </div>
+          <div class="column-half">
+            <label for="notes">Notes</label>
+            <textarea></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
     <div data-view="entries" class="hidden"></div>
   </main>
   <script src="js/data.js"></script>
