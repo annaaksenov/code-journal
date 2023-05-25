@@ -4,6 +4,7 @@
 
 form {
   background-color: rgb(243, 243, 243);
+  padding: 0 1.5rem;
 }
 
 .column-full {
@@ -46,4 +47,20 @@ input {
 textarea {
   resize: none;
   height: 100px;
+}
+
+.submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  float: right;
+  width: 4rem;
+  height: 30px;
+  margin: 15px 0;
+  background-color: rgb(93, 25, 110);
+  color: white;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
 }
