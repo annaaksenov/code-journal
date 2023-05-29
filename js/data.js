@@ -11,7 +11,7 @@ window.addEventListener('beforeunload', handleStorage);
 function handleStorage(event) {
   localStorage.setItem('local-storage', JSON.stringify(data));
 }
-
-if (localStorage.getItem('local-storage', JSON.stringify(data))) {
-  data = JSON.parse(localStorage.getItem('local-storage', JSON.stringify(data)));
+const storage = JSON.parse(localStorage.getItem('local-storage'));
+if (storage) {
+  data = storage;
 }

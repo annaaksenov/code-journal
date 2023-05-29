@@ -18,11 +18,8 @@ function handleClick(event) {
     $url: form.elements.url.value,
     $notes: form.elements.notes.value
   };
-  const nextId = data.nextEntryId;
-  submitObj.entryId = nextId;
-  data.nextEntryId++;
+  submitObj.nextId = data.nextEntryId++;
   data.entries.unshift(submitObj);
-  // may be reason for future hiccups ^
   previewPhoto.setAttribute('src', '/images/placeholder-image-square.jpg');
   form.reset();
 }
