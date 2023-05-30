@@ -14,8 +14,11 @@ form {
   padding: 0;
 }
 
-h1 {
+header {
   background-color: rgb(93, 25, 110);
+}
+
+h1 {
   color: white;
   margin: 0;
   padding: 10px;
