@@ -72,3 +72,17 @@ textarea {
   cursor: pointer;
   border: none;
 }
+
+div[data-view="entries"] > ul {
+  list-style: none;
+}
+
+h3,
+p {
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+}
