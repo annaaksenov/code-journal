@@ -46,5 +46,10 @@ function renderEntry(entry) {
   // return ul;
   return li;
 }
-// continue here
-if (renderEntry);
+const ul = document.querySelector('ul');
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const result = renderEntry(data.entries[i]);
+    ul.append(result);
+  }
+});
