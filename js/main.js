@@ -46,13 +46,24 @@ function renderEntry(entry) {
 }
 
 const ul = document.querySelector('ul');
-const empty = document.createElement('h2');
-empty.textContent = 'No entries have been recorded.';
+const noEntry = document.createElement('p');
+noEntry.className = 'center';
+noEntry.textContent = 'No entries have been recorded.';
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const result = renderEntry(data.entries[i]);
-    ul.append(empty);
-    // delete bottom on
-    result.ATTRIBUTE_NODE();
+    ul.append(result);
   }
 });
+
+function toggleNoEntries(event) {
+  if (data.entries === -1) {
+    return ul.append(noEntry);
+  } else {
+    noEntry.className = 'hidden';
+    ul.append(noEntry);
+  }
+
+}
+// delete later
+toggleNoEntries.setAttribute();

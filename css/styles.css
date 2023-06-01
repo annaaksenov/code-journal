@@ -87,3 +87,8 @@ p {
     Verdana,
     sans-serif;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+}
