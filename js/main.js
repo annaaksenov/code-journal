@@ -25,31 +25,34 @@ function handleClick(event) {
 }
 
 function renderEntry(entry) {
-  // const ul = document.getElementById('#ulist');
   const li = document.createElement('li');
-  const row = document.createElement('div');
-  row.className = 'row';
-  const colHalf = document.createElement('div');
-  colHalf.className = 'column-half';
+  li.className = 'row';
+  const colHalf1 = document.createElement('div');
+  colHalf1.className = 'column-half img';
+  const colHalf2 = document.createElement('div');
+  colHalf2.className = 'column-half text';
   const img = document.createElement('img');
-  img.setAttribute('src', entry.photoURL);
-  // ^ Could be data.entries.photoURL OR entry.$url
+  img.setAttribute('src', entry.$url);
   const h3 = document.createElement('h3');
+  h3.textContent = entry.$title;
   const p = document.createElement('p');
-
-  // ul.appendChild(li);
-  li.appendChild(row);
-  row.appendChild(colHalf);
-  colHalf.appendChild(img);
-  img.appendChild(h3);
-  img.appendChild(p);
-  // return ul;
+  p.textContent = entry.$notes;
+  li.appendChild(colHalf1);
+  colHalf1.appendChild(img);
+  li.appendChild(colHalf2);
+  colHalf2.appendChild(h3);
+  colHalf2.appendChild(p);
   return li;
 }
+
 const ul = document.querySelector('ul');
+const empty = document.createElement('h2');
+empty.textContent = 'No entries have been recorded.';
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const result = renderEntry(data.entries[i]);
-    ul.append(result);
+    ul.append(empty);
+    // delete bottom on
+    result.ATTRIBUTE_NODE();
   }
 });
