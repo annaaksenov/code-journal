@@ -46,9 +46,6 @@ function renderEntry(entry) {
 }
 
 const ul = document.querySelector('ul');
-const noEntry = document.createElement('p');
-noEntry.className = 'center';
-noEntry.textContent = 'No entries have been recorded.';
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const result = renderEntry(data.entries[i]);
@@ -56,6 +53,13 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 });
 
+function toggleNoEntries() {
+  const noEntry = document.querySelector('.center');
+  noEntry.classList.toggle('hidden');
+}
+toggleNoEntries();
+
+/**
 function toggleNoEntries(event) {
   if (data.entries === -1) {
     return ul.append(noEntry);
@@ -65,5 +69,4 @@ function toggleNoEntries(event) {
   }
 
 }
-// delete later
-toggleNoEntries.setAttribute();
+*/
