@@ -46,14 +46,13 @@ function renderEntry(entry) {
 }
 
 const ul = document.querySelector('ul');
-const renderDOM = document.addEventListener('DOMContentLoaded', function (event) {
+// const renderDOM =
+document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const result = renderEntry(data.entries[i]);
     ul.append(result);
   }
 });
-renderDOM();
-// Need to remove later ^
 
 function toggleNoEntries() {
   const noEntry = document.querySelector('.center');
@@ -61,14 +60,20 @@ function toggleNoEntries() {
 }
 toggleNoEntries();
 
+const entForm = document.querySelector('div[data-view="entry-form"]');
+const ent = document.querySelector('div[data-view="entries"]');
+
 function viewSwap(view) {
+  data.view = view;
   if (view === 'entries') {
-    data.view = 'entries';
-    return ul;
-  } else if (view === 'entry-form') {
-    data.view = 'entry-form';
-    return form;
+    entForm.classList.add('hidden');
+    ent.classList.remove('hidden');
+  } else {
+    entForm.classList.remove('hidden');
+    ent.classList.add('hidden');
   }
 }
-viewSwap();
-// need to remove later ^
+const a = document.querySelector('a');
+a.addEventListener('click', function () {
+  viewSwap('entries');
+});
