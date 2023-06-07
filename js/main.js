@@ -10,9 +10,10 @@ function handleInput(event) {
 }
 
 const sub = document.querySelector('.submit');
-sub.addEventListener('click', handleClick);
+sub.addEventListener('click', function () {
+  /** handleClick);
 function handleClick(event) {
-  event.preventDefault();
+  event.preventDefault(); */
   const submitObj = {
     $title: form.elements.title.value,
     $url: form.elements.url.value,
@@ -20,9 +21,11 @@ function handleClick(event) {
   };
   submitObj.nextId = data.nextEntryId++;
   data.entries.unshift(submitObj);
+  ul.prepend(renderEntry());
+  viewSwap('entries');
+  toggleNoEntries();
   previewPhoto.setAttribute('src', '/images/placeholder-image-square.jpg');
-  form.reset();
-}
+});
 
 function renderEntry(entry) {
   const li = document.createElement('li');
@@ -33,6 +36,7 @@ function renderEntry(entry) {
   colHalf2.className = 'column-half text';
   const img = document.createElement('img');
   img.setAttribute('src', entry.$url);
+  // Causing issues ^
   const h3 = document.createElement('h3');
   h3.textContent = entry.$title;
   const p = document.createElement('p');
@@ -58,7 +62,6 @@ function toggleNoEntries() {
   const noEntry = document.querySelector('.center');
   noEntry.classList.toggle('hidden');
 }
-toggleNoEntries();
 
 const entForm = document.querySelector('div[data-view="entry-form"]');
 const ent = document.querySelector('div[data-view="entries"]');
