@@ -68,7 +68,7 @@ function viewSwap(view) {
   if (view === 'entries') {
     entForm.classList.add('hidden');
     ent.classList.remove('hidden');
-  } else {
+  } else if (view === 'entry-form') {
     entForm.classList.remove('hidden');
     ent.classList.add('hidden');
   }
@@ -76,4 +76,9 @@ function viewSwap(view) {
 const a = document.querySelector('a');
 a.addEventListener('click', function () {
   viewSwap('entries');
+});
+
+const newEntryBtn = document.querySelector('.new');
+newEntryBtn.addEventListener('click', function () {
+  viewSwap('entry-form');
 });

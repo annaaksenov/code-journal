@@ -82,7 +82,8 @@ textarea {
   height: 100px;
 }
 
-.submit {
+.submit,
+.new {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -106,4 +107,8 @@ div[data-view="entries"] > ul {
 .center {
   display: flex;
   justify-content: center;
+}
+
+.new {
+  margin: 0;
 }
