@@ -11,9 +11,6 @@ function handleInput(event) {
 
 const sub = document.querySelector('.submit');
 sub.addEventListener('click', function () {
-  /** handleClick);
-function handleClick(event) {
-  event.preventDefault(); */
   const submitObj = {
     $title: form.elements.title.value,
     $url: form.elements.url.value,
@@ -21,7 +18,7 @@ function handleClick(event) {
   };
   submitObj.nextId = data.nextEntryId++;
   data.entries.unshift(submitObj);
-  ul.prepend(renderEntry());
+  ul.prepend(renderEntry(submitObj));
   viewSwap('entries');
   toggleNoEntries();
   previewPhoto.setAttribute('src', '/images/placeholder-image-square.jpg');
@@ -36,7 +33,6 @@ function renderEntry(entry) {
   colHalf2.className = 'column-half text';
   const img = document.createElement('img');
   img.setAttribute('src', entry.$url);
-  // Causing issues ^
   const h3 = document.createElement('h3');
   h3.textContent = entry.$title;
   const p = document.createElement('p');
@@ -50,16 +46,19 @@ function renderEntry(entry) {
 }
 
 const ul = document.querySelector('ul');
-// const renderDOM =
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const result = renderEntry(data.entries[i]);
     ul.append(result);
+    viewSwap(data.view);
+  }
+  if (data.entries.length !== 0) {
+    toggleNoEntries();
   }
 });
 
 function toggleNoEntries() {
-  const noEntry = document.querySelector('.center');
+  const noEntry = document.querySelector('#no-entry');
   noEntry.classList.toggle('hidden');
 }
 
