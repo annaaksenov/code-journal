@@ -39,6 +39,18 @@ textarea {
     sans-serif;
 }
 
+.navigate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.entry-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 nav {
   display: flex;
   color: white;
@@ -99,6 +111,10 @@ textarea {
   border: none;
 }
 
+.new {
+  margin: 0;
+}
+
 div[data-view="entries"] > ul {
   list-style: none;
   padding: 0;
@@ -107,8 +123,4 @@ div[data-view="entries"] > ul {
 .center {
   display: flex;
   justify-content: center;
-}
-
-.new {
-  margin: 0;
 }
