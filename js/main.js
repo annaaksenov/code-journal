@@ -27,6 +27,7 @@ sub.addEventListener('click', function () {
 function renderEntry(entry) {
   const li = document.createElement('li');
   li.className = 'row';
+  li.setAttribute('data-entry-id', data.entries.length);
   const colHalf1 = document.createElement('div');
   colHalf1.className = 'column-half img';
   const colHalf2 = document.createElement('div');
@@ -35,12 +36,15 @@ function renderEntry(entry) {
   img.setAttribute('src', entry.$url);
   const h3 = document.createElement('h3');
   h3.textContent = entry.$title;
+  const pencil = document.createElement('i');
+  pencil.className = 'fa-solid fa-pencil fa-sm';
   const p = document.createElement('p');
   p.textContent = entry.$notes;
   li.appendChild(colHalf1);
   colHalf1.appendChild(img);
   li.appendChild(colHalf2);
   colHalf2.appendChild(h3);
+  h3.appendChild(pencil);
   colHalf2.appendChild(p);
   return li;
 }

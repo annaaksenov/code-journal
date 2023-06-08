@@ -124,3 +124,10 @@ div[data-view="entries"] > ul {
   display: flex;
   justify-content: center;
 }
+
+i {
+  display: flex;
+  float: right;
+  color: rgb(93, 25, 110);
+  cursor: pointer;
+}
