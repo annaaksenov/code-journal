@@ -9,20 +9,54 @@ function handleInput(event) {
   previewPhoto.setAttribute('src', urlObj.$url);
 }
 
-const sub = document.querySelector('.submit');
-sub.addEventListener('click', function () {
-  const submitObj = {
-    $title: form.elements.title.value,
-    $url: form.elements.url.value,
-    $notes: form.elements.notes.value
-  };
-  submitObj.entryId = data.nextEntryId++;
-  data.entries.unshift(submitObj);
-  ul.prepend(renderEntry(submitObj));
-  viewSwap('entries');
-  toggleNoEntries();
+// const sub = document.querySelector('.submit');
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+  if (data.editing === null) {
+    const submitObj = {
+      $title: form.elements.title.value,
+      $url: form.elements.url.value,
+      $notes: form.elements.notes.value
+    };
+    submitObj.entryId = data.nextEntryId++;
+    data.entries.unshift(submitObj);
+    ul.prepend(renderEntry(submitObj));
+    viewSwap('entries');
+    // toggleNoEntries();
+  }
+  if (data.editing !== null) {
+    const li = document.querySelectorAll('li');
+    const updatedForm = {
+      $ti: form.elements.title.value,
+      $ur: form.elements.url.value,
+      $not: form.elements.notes.value
+    };
+    updatedForm.entryId = data.editing.entryId;
+    // console.log(updatedForm);
+    for (let i = 0; i < data.entries.length; i++) {
+      // console.log('data.editing', data.editing);
+      // console.log('data.entries', data.entries);
+      if (data.editing.entryId === data.entries[i].entryId) {
+        data.entries[i] = updatedForm;
+        li[i].replaceWith(renderEntry(updatedForm));
+        data.editing = null;
+      }
+    }
+  }
+  // console.log('data.entries2', data.entries);
+  // look at reset
+  form.reset();
   previewPhoto.setAttribute('src', '/images/placeholder-image-square.jpg');
+  document.querySelector('#formTitle').innerHTML = 'New Entry';
 });
+// toggle acting up?
+// console log along the way
+// define w/in func and try diff selectors
+/**
+ * submitObj.entryId = data.editing.entryId;
+ * submitObj.replaceWith(data.entries, data.editing);
+ * data.editing.replaceWith(renderEntry(submitObj));
+ */
 
 function renderEntry(entry) {
   const li = document.createElement('li');
@@ -99,6 +133,7 @@ ul.addEventListener('click', function (event) {
     // console.log(event.target.closest('li').getAttribute('data-entry-id'));
     if (data.entries[i].entryId === Number(event.target.closest('li').getAttribute('data-entry-id'))) {
       data.editing = data.entries[i];
+      // console.log('test hi');
       const prePopulate = {
         $t: data.editing.$title,
         $u: data.editing.$url,
