@@ -22,13 +22,13 @@ form.addEventListener('submit', function (event) {
     ul.prepend(renderEntry(submitObj));
   }
   if (data.editing !== null) {
-    const li = document.querySelectorAll('li');
     const updatedForm = {
       $title: form.elements.title.value,
       $url: form.elements.url.value,
       $notes: form.elements.notes.value
     };
     updatedForm.entryId = data.editing.entryId;
+    const li = document.querySelectorAll('li');
     for (let i = 0; i < data.entries.length; i++) {
       if (data.editing.entryId === data.entries[i].entryId) {
         data.entries[i] = updatedForm;
@@ -113,8 +113,12 @@ const newEntryBtn = document.querySelector('.new');
 newEntryBtn.addEventListener('click', function () {
   resetForm();
   viewSwap('entry-form');
-
 });
+
+function deleteButton() {
+  const del = document.querySelector('.delete');
+  del.classList.add('hidden');
+}
 
 ul.addEventListener('click', function (event) {
   if (!event.target.matches('.fa-solid')) {
@@ -135,5 +139,6 @@ ul.addEventListener('click', function (event) {
       previewPhoto.setAttribute('src', prePopulate.$url);
     }
   }
+  deleteButton();
   document.querySelector('#formTitle').innerHTML = 'Edit Entry';
 });

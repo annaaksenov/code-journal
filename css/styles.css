@@ -111,6 +111,20 @@ textarea {
   border: none;
 }
 
+.delete {
+  float: left;
+  margin: 15px 0;
+  border: none;
+  text-decoration: underline;
+  width: auto;
+  color: red;
+  cursor: pointer;
+}
+
+.bts {
+  flex-basis: 50%;
+}
+
 .new {
   margin: 0;
 }
