@@ -20,8 +20,6 @@ form.addEventListener('submit', function (event) {
     submitObj.entryId = data.nextEntryId++;
     data.entries.unshift(submitObj);
     ul.prepend(renderEntry(submitObj));
-    viewSwap('entries');
-    toggleNoEntries();
   }
   if (data.editing !== null) {
     const li = document.querySelectorAll('li');
@@ -36,10 +34,13 @@ form.addEventListener('submit', function (event) {
         data.entries[i] = updatedForm;
         li[i].replaceWith(renderEntry(updatedForm));
         data.editing = null;
+        break;
       }
     }
   }
   resetForm();
+  viewSwap('entries');
+  toggleNoEntries();
 });
 
 function resetForm() {
@@ -124,17 +125,14 @@ ul.addEventListener('click', function (event) {
     if (data.entries[i].entryId === Number(event.target.closest('li').getAttribute('data-entry-id'))) {
       data.editing = data.entries[i];
       const prePopulate = {
-        $t: data.editing.$title,
-        $u: data.editing.$url,
-        $n: data.editing.$notes
+        $title: data.editing.$title,
+        $url: data.editing.$url,
+        $notes: data.editing.$notes
       };
-      const getTitle = document.querySelector('#title');
-      getTitle.setAttribute('value', prePopulate.$t);
-      const getPhoto = document.querySelector('#url');
-      getPhoto.setAttribute('value', prePopulate.$u);
-      previewPhoto.setAttribute('src', prePopulate.$u);
-      const getNote = document.querySelector('#notes');
-      getNote.innerHTML = prePopulate.$n;
+      form.elements.title.value = prePopulate.$title;
+      form.elements.url.value = prePopulate.$url;
+      form.elements.notes.value = prePopulate.$notes;
+      previewPhoto.setAttribute('src', prePopulate.$url);
     }
   }
   document.querySelector('#formTitle').innerHTML = 'Edit Entry';
