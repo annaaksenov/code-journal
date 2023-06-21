@@ -115,10 +115,20 @@ newEntryBtn.addEventListener('click', function () {
   viewSwap('entry-form');
 });
 
+const del = document.querySelector('.delete');
 function deleteButton() {
-  const del = document.querySelector('.delete');
-  del.classList.add('hidden');
+  del.classList.remove('hidden');
 }
+
+const mod = document.querySelector('.modal');
+del.addEventListener('click', function () {
+  mod.classList.remove('hidden');
+});
+
+const cancel = document.querySelector('.cancel');
+cancel.addEventListener('click', function () {
+  mod.classList.add('hidden');
+});
 
 ul.addEventListener('click', function (event) {
   if (!event.target.matches('.fa-solid')) {
