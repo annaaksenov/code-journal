@@ -115,21 +115,6 @@ newEntryBtn.addEventListener('click', function () {
   viewSwap('entry-form');
 });
 
-const del = document.querySelector('.delete');
-function deleteButton() {
-  del.classList.remove('hidden');
-}
-
-const mod = document.querySelector('.modal');
-del.addEventListener('click', function () {
-  mod.classList.remove('hidden');
-});
-
-const cancel = document.querySelector('.cancel');
-cancel.addEventListener('click', function () {
-  mod.classList.add('hidden');
-});
-
 ul.addEventListener('click', function (event) {
   if (!event.target.matches('.fa-solid')) {
     return;
@@ -151,4 +136,37 @@ ul.addEventListener('click', function (event) {
   }
   deleteButton();
   document.querySelector('#formTitle').innerHTML = 'Edit Entry';
+});
+
+const del = document.querySelector('.delete');
+function deleteButton() {
+  del.classList.remove('hidden');
+}
+
+const mod = document.querySelector('.modal');
+del.addEventListener('click', function () {
+  mod.classList.remove('hidden');
+});
+
+const cancel = document.querySelector('.cancel');
+cancel.addEventListener('click', function () {
+  mod.classList.add('hidden');
+});
+
+const confirm = document.querySelector('.confirm');
+confirm.addEventListener('click', function (event) {
+  if (!event.target.matches('.confirm')) {
+    return;
+  }
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.editing.entryId === data.entries[i].entryId) {
+      const index = data.entries[i];
+      data.entries.slice(index);
+    }
+  }
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
+  mod.classList.add('hidden');
+  viewSwap('entries');
 });
