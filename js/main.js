@@ -154,14 +154,20 @@ cancel.addEventListener('click', function () {
 });
 
 const confirm = document.querySelector('.confirm');
-confirm.addEventListener('click', function (event) {
-  if (!event.target.matches('.confirm')) {
-    return;
+confirm.addEventListener('click', function () {
+  function confirmBtn(array) {
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.editing.entryId !== data.entries[i].entryId) {
+        data.entries = data.entries[i];
+      }
+    }
   }
-  for (let i = 0; i < data.entries.length; i++) {
-    if (data.editing.entryId === data.entries[i].entryId) {
-      const index = data.entries[i];
-      data.entries.slice(index);
+  const filtered = data.entries.filter(confirmBtn);
+  data.entries = filtered;
+  const liElements = document.querySelectorAll('li');
+  for (let j = 0; j < liElements.length; j++) {
+    if (data.entries.entryId === liElements[j].getAttribute('data-entry-id')) {
+      liElements[j].remove();
     }
   }
   if (data.entries.length === 0) {
