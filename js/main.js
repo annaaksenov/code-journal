@@ -22,13 +22,13 @@ form.addEventListener('submit', function (event) {
     ul.prepend(renderEntry(submitObj));
   }
   if (data.editing !== null) {
-    const li = document.querySelectorAll('li');
     const updatedForm = {
       $title: form.elements.title.value,
       $url: form.elements.url.value,
       $notes: form.elements.notes.value
     };
     updatedForm.entryId = data.editing.entryId;
+    const li = document.querySelectorAll('li');
     for (let i = 0; i < data.entries.length; i++) {
       if (data.editing.entryId === data.entries[i].entryId) {
         data.entries[i] = updatedForm;
@@ -38,6 +38,7 @@ form.addEventListener('submit', function (event) {
       }
     }
   }
+  data.editing = null;
   resetForm();
   viewSwap('entries');
   toggleNoEntries();
@@ -113,7 +114,6 @@ const newEntryBtn = document.querySelector('.new');
 newEntryBtn.addEventListener('click', function () {
   resetForm();
   viewSwap('entry-form');
-
 });
 
 ul.addEventListener('click', function (event) {
@@ -135,5 +135,47 @@ ul.addEventListener('click', function (event) {
       previewPhoto.setAttribute('src', prePopulate.$url);
     }
   }
+  showDeleteButton();
   document.querySelector('#formTitle').innerHTML = 'Edit Entry';
+});
+
+const del = document.querySelector('.delete');
+function showDeleteButton() {
+  del.classList.remove('hidden');
+}
+
+const mod = document.querySelector('.modal');
+del.addEventListener('click', function () {
+  mod.classList.remove('hidden');
+});
+
+const cancel = document.querySelector('.cancel');
+cancel.addEventListener('click', function () {
+  mod.classList.add('hidden');
+});
+
+const confirm = document.querySelector('.confirm');
+confirm.addEventListener('click', function () {
+  function filterCallback(currentEntry) {
+    if (data.editing.entryId !== currentEntry.entryId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  const filtered = data.entries.filter(filterCallback);
+  data.entries = filtered;
+  const liElements = document.querySelectorAll('li');
+  for (let j = 0; j < liElements.length; j++) {
+    if (data.editing.entryId === Number(liElements[j].getAttribute('data-entry-id'))) {
+      liElements[j].remove();
+    }
+  }
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
+  mod.classList.add('hidden');
+  viewSwap('entries');
+  resetForm();
+  data.editing = null;
 });
