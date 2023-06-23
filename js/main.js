@@ -38,6 +38,7 @@ form.addEventListener('submit', function (event) {
       }
     }
   }
+  data.editing = null;
   resetForm();
   viewSwap('entries');
   toggleNoEntries();
@@ -134,12 +135,12 @@ ul.addEventListener('click', function (event) {
       previewPhoto.setAttribute('src', prePopulate.$url);
     }
   }
-  deleteButton();
+  showDeleteButton();
   document.querySelector('#formTitle').innerHTML = 'Edit Entry';
 });
 
 const del = document.querySelector('.delete');
-function deleteButton() {
+function showDeleteButton() {
   del.classList.remove('hidden');
 }
 
@@ -155,18 +156,18 @@ cancel.addEventListener('click', function () {
 
 const confirm = document.querySelector('.confirm');
 confirm.addEventListener('click', function () {
-  function confirmBtn(array) {
-    for (let i = 0; i < data.entries.length; i++) {
-      if (data.editing.entryId !== data.entries[i].entryId) {
-        data.entries = data.entries[i];
-      }
+  function filterCallback(currentEntry) {
+    if (data.editing.entryId !== currentEntry.entryId) {
+      return true;
+    } else {
+      return false;
     }
   }
-  const filtered = data.entries.filter(confirmBtn);
+  const filtered = data.entries.filter(filterCallback);
   data.entries = filtered;
   const liElements = document.querySelectorAll('li');
   for (let j = 0; j < liElements.length; j++) {
-    if (data.entries.entryId === liElements[j].getAttribute('data-entry-id')) {
+    if (data.editing.entryId === Number(liElements[j].getAttribute('data-entry-id'))) {
       liElements[j].remove();
     }
   }
@@ -175,4 +176,6 @@ confirm.addEventListener('click', function () {
   }
   mod.classList.add('hidden');
   viewSwap('entries');
+  resetForm();
+  data.editing = null;
 });
